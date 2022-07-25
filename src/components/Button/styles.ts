@@ -4,6 +4,7 @@ export const StyledButton = styled.button.attrs((props) => ({
   type: "button",
   disabled: props.disabled,
 }))`
+  height: 68px;
   background-color: rgba(46, 210, 201, 1);
   border: none;
   color: rgba(255, 255, 255, 1);

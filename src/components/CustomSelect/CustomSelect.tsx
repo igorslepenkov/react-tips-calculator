@@ -16,6 +16,7 @@ export const CustomSelect = ({
   const customStyles: StylesConfig = {
     control: (provided: CSSObjectWithLabel) => ({
       ...provided,
+      height: 68,
       fontSize: 18,
       textAlign: "center",
       borderRadius: 30,
