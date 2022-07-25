@@ -14,11 +14,12 @@ function App() {
   const [selectedValue, setSelectedValue] = useState<SelectOption>(
     selectOptions[0]
   );
-  const [billInputValue, setBillInputValue] = useState(0);
-  const [personsInputValue, setPersonsInputValue] = useState(0);
-
+  const [billInputValue, setBillInputValue] = useState<number | string>("");
+  const [personsInputValue, setPersonsInputValue] = useState<number | string>(
+    ""
+  );
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
+  const [total, setTotal] = useState<string>("0.00");
   const handleSelectState = (value: SelectOption): void => {
     setSelectedValue(value);
   };
@@ -37,6 +38,18 @@ function App() {
     }
   }, [selectedValue, billInputValue, personsInputValue]);
 
+  const calculateTips = () => {
+    const bill = Number(billInputValue);
+    const persons = Number(personsInputValue);
+    const tipsPercent = Number(selectedValue.value);
+    const total = ((bill * tipsPercent) / 100) * persons + bill;
+    return (Math.round(total * 1000) / 1000).toFixed(2);
+  };
+
+  const handleButtonClick = () => {
+    setTotal(calculateTips());
+  };
+
   return (
     <StyledApp>
       <AppTitle>Welcome to App</AppTitle>
@@ -50,6 +63,8 @@ function App() {
         personsInputValue={personsInputValue}
         setPersonsInputValue={handlePersonsInputValue}
         isButtonDisabled={isButtonDisabled}
+        onClickButton={handleButtonClick}
+        total={total}
       />
     </StyledApp>
   );

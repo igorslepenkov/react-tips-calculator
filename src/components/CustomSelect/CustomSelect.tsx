@@ -1,4 +1,4 @@
-import Select from "react-select";
+import Select, { CSSObjectWithLabel } from "react-select";
 import { SelectOption } from "../../types";
 import { StylesConfig } from "react-select";
 
@@ -14,7 +14,7 @@ export const CustomSelect = ({
   setSelectState,
 }: IProps) => {
   const customStyles: StylesConfig = {
-    control: (provided) => ({
+    control: (provided: CSSObjectWithLabel) => ({
       ...provided,
       fontSize: 18,
       textAlign: "center",

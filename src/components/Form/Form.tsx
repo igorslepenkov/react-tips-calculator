@@ -8,11 +8,13 @@ interface IProps {
   selectOptions: SelectOption[];
   selectedValue: SelectOption;
   setSelectState: Function;
-  billInputValue: number;
+  billInputValue: number | string;
   setBillinputValue: Function;
-  personsInputValue: number;
+  personsInputValue: number | string;
   setPersonsInputValue: Function;
   isButtonDisabled: boolean;
+  onClickButton: Function;
+  total: string;
 }
 
 export const Form = ({
@@ -24,6 +26,8 @@ export const Form = ({
   personsInputValue,
   setPersonsInputValue,
   isButtonDisabled,
+  onClickButton,
+  total,
 }: IProps) => {
   return (
     <StyledForm>
@@ -44,8 +48,12 @@ export const Form = ({
         selectedValue={selectedValue}
         setSelectState={setSelectState}
       />
-      <Total>Total: </Total>
-      <Button isDisabled={isButtonDisabled} />
+      <Total>Total: {total}$</Total>
+      <Button
+        isDisabled={isButtonDisabled}
+        text={"Ohhhoooo🍻"}
+        onClickButton={onClickButton}
+      />
     </StyledForm>
   );
 };

@@ -3,7 +3,7 @@ import { StyledInput } from "./styles";
 interface IProps {
   type: "text" | "number";
   placeholder: string;
-  value: number;
+  value: number | string;
   valueSetter: Function;
 }
 
