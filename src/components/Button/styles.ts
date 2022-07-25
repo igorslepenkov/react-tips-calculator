@@ -8,4 +8,5 @@ export const StyledButton = styled.button.attrs((props) => ({
   border: none;
   color: rgba(255, 255, 255, 1);
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  font-size: 18px;
 `;

@@ -2,14 +2,21 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     body {
-        position: relative;
         height: 100vh;
         margin: 0;
         font-family: 'Noto Sans', sans-serif;
         background-color: rgba(46, 210, 201, 1);
     }
 
-    body::before {
+    #root {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        max-width: 1512px;
+    }
+
+    #root::before {
         content: '';
         position: absolute;
         left: -90px;
@@ -20,8 +27,8 @@ export const GlobalStyle = createGlobalStyle`
         border-radius: 50%;
         background-color: rgba(133, 211, 202, 0.31);
     }
-
-    body::after {
+    
+    #root::after {
         content: '';
         position: absolute;
         top: -100px;
@@ -30,10 +37,5 @@ export const GlobalStyle = createGlobalStyle`
         height: 250px;
         border-radius: 50%;
         background-color: rgba(133, 211, 202, 0.31);
-    }
-
-    #root {
-        height: 100%;
-        width: 100%;
     }
 `;
