@@ -1,10 +1,11 @@
+import { ChangeEventHandler } from "react";
 import { StyledInput } from "./styles";
 
 interface IProps {
   type: "text" | "number";
   placeholder: string;
   value: number | string;
-  valueSetter: Function;
+  valueSetter: ChangeEventHandler<HTMLInputElement>;
 }
 
 export const Input = ({ type, placeholder, value, valueSetter }: IProps) => {
@@ -13,7 +14,7 @@ export const Input = ({ type, placeholder, value, valueSetter }: IProps) => {
       type={type}
       placeholder={placeholder}
       value={value}
-      onChange={({ target }) => valueSetter(target.value)}
+      onChange={valueSetter}
     />
   );
 };

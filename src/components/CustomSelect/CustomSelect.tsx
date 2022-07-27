@@ -1,25 +1,35 @@
-import Select, { CSSObjectWithLabel } from "react-select";
-import { SelectOption } from "../../types";
+import Select, { CSSObjectWithLabel, SingleValue } from "react-select";
+import { ISelectOption } from "../../types";
 import { StylesConfig } from "react-select";
 
 interface IProps {
-  selectOptions: SelectOption[];
-  selectedValue: SelectOption;
-  setSelectState: Function;
+  selectOptions: ISelectOption[];
+  selectedValue: ISelectOption;
+  setSelectValue: (value: SingleValue<ISelectOption>) => void;
 }
 
 export const CustomSelect = ({
   selectOptions,
   selectedValue,
-  setSelectState,
+  setSelectValue,
 }: IProps) => {
-  const customStyles: StylesConfig = {
+  const customStyles: StylesConfig<ISelectOption> = {
     control: (provided: CSSObjectWithLabel) => ({
       ...provided,
       height: 68,
       fontSize: 18,
       textAlign: "center",
       borderRadius: 30,
+      paddingLeft: 50,
+    }),
+
+    indicatorsContainer: (provided) => ({
+      ...provided,
+
+      svg: {
+        height: 50,
+        width: 50,
+      },
     }),
   };
 
@@ -31,8 +41,9 @@ export const CustomSelect = ({
         IndicatorSeparator: () => null,
       }}
       value={selectedValue}
-      onChange={(newValue) => setSelectState(newValue)}
+      onChange={setSelectValue}
       styles={customStyles}
+      isMulti={false}
     />
   );
 };
