@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import circles from "./assets/circles.svg";
 
 export const StyledApp = styled.div`
   display: flex;
@@ -7,5 +8,5 @@ export const StyledApp = styled.div`
   align-items: center;
   height: 100%;
   text-align: center;
-  background-color: rgba(234, 242, 242, 1);
+  background: no-repeat url(${circles}) rgba(234, 242, 242, 1);
 `;
