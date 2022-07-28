@@ -4,7 +4,8 @@ import { CustomSelect } from "../CustomSelect";
 import { ISelectOption } from "../../types";
 import { Button } from "../Button";
 import { SingleValue } from "react-select";
-import { ChangeEventHandler, FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { useInput } from "../../hooks/useInput";
 
 export const Form = () => {
   const options: ISelectOption[] = [
@@ -17,36 +18,23 @@ export const Form = () => {
   const [selectValue, setSelectValue] = useState<ISelectOption>(
     selectOptions[0]
   );
-  const [billInputValue, setBillInputValue] = useState<string>("");
-  const [personsInputValue, setPersonsInputValue] = useState<string>("");
+  const bill = useInput();
+  const persons = useInput();
+
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [total, setTotal] = useState<string>("0.00");
+
   const handleSelectState = (value: SingleValue<ISelectOption>): void => {
     if (value) {
       setSelectValue(value);
     }
   };
 
-  const handleBillInputValue: ChangeEventHandler<HTMLInputElement> = (
-    event
-  ): void => {
-    if (event) {
-      setBillInputValue(event.target.value);
-    }
-  };
-  const handlePersonsInputValue: ChangeEventHandler<HTMLInputElement> = (
-    event
-  ): void => {
-    if (event) {
-      setPersonsInputValue(event.target.value);
-    }
-  };
-
   const calculateTips = () => {
-    const bill = Number(billInputValue);
-    const persons = Number(personsInputValue);
+    const billValue = Number(bill.value);
+    const personsValue = Number(persons.value);
     const tipsPercent = Number(selectValue.value);
-    const total = ((bill * tipsPercent) / 100) * persons + bill;
+    const total = ((billValue * tipsPercent) / 100) * personsValue + billValue;
     return (Math.round(total * 1000) / 1000).toFixed(2);
   };
 
@@ -56,29 +44,19 @@ export const Form = () => {
   };
 
   useEffect(() => {
-    if (billInputValue && personsInputValue) {
+    if (bill.value && persons.value) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
-  }, [billInputValue, personsInputValue]);
+  }, [bill, persons]);
 
   return (
     <StyledForm onSubmit={handleSubmit}>
       <FormTitle>Welcome to App</FormTitle>
       <FormSubtitle>Let’s go calculate your tips</FormSubtitle>
-      <Input
-        type={"number"}
-        placeholder={"Enter bill"}
-        value={billInputValue}
-        valueSetter={handleBillInputValue}
-      />
-      <Input
-        type={"number"}
-        placeholder={"Enter persons"}
-        value={personsInputValue}
-        valueSetter={handlePersonsInputValue}
-      />
+      <Input type={"number"} placeholder={"Enter bill"} {...bill} />
+      <Input type={"number"} placeholder={"Enter persons"} {...persons} />
       <CustomSelect
         selectOptions={selectOptions}
         selectedValue={selectValue}

@@ -4,17 +4,17 @@ import { StyledInput } from "./styles";
 interface IProps {
   type: "text" | "number";
   placeholder: string;
-  value: number | string;
-  valueSetter: ChangeEventHandler<HTMLInputElement>;
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-export const Input = ({ type, placeholder, value, valueSetter }: IProps) => {
+export const Input = ({ type, placeholder, value, onChange }: IProps) => {
   return (
     <StyledInput
       type={type}
       placeholder={placeholder}
       value={value}
-      onChange={valueSetter}
+      onChange={onChange}
     />
   );
 };
